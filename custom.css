@@ -1,0 +1,20 @@
+/* Custom utility augmentations and smooth transitions */
+.nav-link { transition: color 200ms ease, opacity 200ms ease; opacity: 0.9; }
+.nav-link:hover { opacity: 1; }
+
+.card-reveal { opacity: 0; transform: translateY(10px); transition: all 500ms ease; }
+.animate-fadeUp.card-reveal { opacity: 1; transform: translateY(0); }
+
+/* Smooth focus outlines */
+input:focus, textarea:focus, select:focus, button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(77, 135, 255, 0.25);
+}
+
+/* Improve form controls look with Tailwind borders present */
+input, textarea, select {
+  padding: 0.6rem 0.8rem;
+}
+
+
+

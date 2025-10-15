@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | HeartCare</title>
+    <meta name="description" content="Contact form for questions and feedback. Form validation included." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'] }, colors: { brand: {50:'#f5f8ff',100:'#e6f0ff',200:'#bfd6ff',300:'#99bcff',400:'#73a1ff',500:'#4d87ff',600:'#2a69f7',700:'#1e52cc',800:'#173e99',900:'#112b66'}, heart:{50:'#fff5f6',100:'#ffe1e5',200:'#ffb3bf',300:'#ff8097',400:'#ff4d70',500:'#ff2d57',600:'#e01445',700:'#b80f37',800:'#900a2b',900:'#6a071f'} }, boxShadow:{glow:'0 10px 40px rgba(77,135,255,0.3)',soft:'0 6px 24px rgba(0,0,0,0.08)'}, animation:{float:'float 6s ease-in-out infinite',fadeUp:'fadeUp 0.7s ease-out both'}, keyframes:{ float:{'0%,100%':{transform:'translateY(0)'},'50%':{transform:'translateY(-10px)'}}, fadeUp:{'0%':{opacity:0,transform:'translateY(12px)'},'100%':{opacity:1,transform:'translateY(0)'}} } } } }
+    </script>
+    <link rel="stylesheet" href="custom.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-brand-50 via-white to-heart-50 text-slate-800">
+    <header class="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-slate-200/60">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="inline-flex h-9 w-9 rounded-xl bg-gradient-to-br from-heart-400 to-brand-500 shadow-glow items-center justify-center text-white font-extrabold">❤</span>
+          <span class="font-extrabold text-xl">HeartCare</span>
+        </a>
+        <nav>
+          <ul class="flex items-center gap-4 md:gap-6 text-sm font-semibold">
+            <li><a class="nav-link" href="index.html">Home</a></li>
+            <li><a class="nav-link" href="about.html">About</a></li>
+            <li><a class="nav-link" href="tips.html">Tips</a></li>
+            <li><a class="nav-link" href="causes.html">Causes</a></li>
+            <li><a class="nav-link text-brand-700" href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pb-16">
+      <section class="max-w-7xl mx-auto px-6 pt-14 pb-6" data-aos="fade-up">
+        <h1 class="text-4xl md:text-5xl font-extrabold">Contact Us</h1>
+        <p class="mt-3 text-slate-600 max-w-prose">Send your questions or feedback. We’ll get back to you soon.</p>
+      </section>
+
+      <section class="max-w-3xl mx-auto px-6" data-aos="fade-up" data-aos-delay="100">
+        <form id="contact-form" class="rounded-2xl border border-slate-200 p-6 bg-white shadow-soft" action="#" method="post" novalidate>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-semibold">Name</label>
+              <input type="text" id="c-name" class="mt-1 w-full rounded-xl border-slate-300" placeholder="Your name" required />
+              <p class="mt-1 text-xs text-red-600 hidden" id="err-name">Please enter your name.</p>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold">Email</label>
+              <input type="email" id="c-email" class="mt-1 w-full rounded-xl border-slate-300" placeholder="you@example.com" required />
+              <p class="mt-1 text-xs text-red-600 hidden" id="err-email">Please enter a valid email.</p>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="block text-sm font-semibold">Message</label>
+            <textarea id="c-message" rows="5" class="mt-1 w-full rounded-xl border-slate-300" placeholder="Your message" required></textarea>
+            <p class="mt-1 text-xs text-red-600 hidden" id="err-message">Please enter a message.</p>
+          </div>
+          <button class="mt-4 px-4 py-2 rounded-xl bg-gradient-to-r from-heart-500 to-brand-600 text-white font-bold" type="submit">Send</button>
+          <p class="mt-2 text-xs text-slate-500">This demo form does not send email. You can wire it to Formspree later.</p>
+          <p class="mt-3 text-sm text-emerald-700 hidden" id="success-msg">Thanks! Your message passed validation.</p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white/80 backdrop-blur">
+      <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-slate-600">© <span id="year"></span> HeartCare</p>
+        <div class="flex gap-4 text-sm">
+          <a class="hover:underline" href="contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="main.js"></script>
+    <script>
+      (function(){
+        const form = document.getElementById('contact-form');
+        if(!form) return;
+        const nameEl = document.getElementById('c-name');
+        const emailEl = document.getElementById('c-email');
+        const msgEl = document.getElementById('c-message');
+        const eName = document.getElementById('err-name');
+        const eEmail = document.getElementById('err-email');
+        const eMsg = document.getElementById('err-message');
+        const ok = document.getElementById('success-msg');
+        function validateEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+        form.addEventListener('submit', function(ev){
+          ev.preventDefault();
+          let valid = true;
+          if(!nameEl.value.trim()){ eName.classList.remove('hidden'); valid = false; } else { eName.classList.add('hidden'); }
+          if(!validateEmail(emailEl.value)){ eEmail.classList.remove('hidden'); valid = false; } else { eEmail.classList.add('hidden'); }
+          if(!msgEl.value.trim()){ eMsg.classList.remove('hidden'); valid = false; } else { eMsg.classList.add('hidden'); }
+          if(valid){ ok.classList.remove('hidden'); form.reset(); }
+        });
+      })();
+    </script>
+  </body>
+  </html>
+
+
+
+

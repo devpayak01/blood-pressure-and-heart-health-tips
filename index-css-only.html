@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HeartCare - Pure CSS Version</title>
+    <meta name="description" content="Modern blood pressure and heart health tips with pure CSS animations." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+            colors: {
+              brand: {
+                50: '#f5f8ff', 100: '#e6f0ff', 200: '#bfd6ff', 300: '#99bcff', 400: '#73a1ff',
+                500: '#4d87ff', 600: '#2a69f7', 700: '#1e52cc', 800: '#173e99', 900: '#112b66'
+              },
+              heart: {
+                50: '#fff5f6', 100: '#ffe1e5', 200: '#ffb3bf', 300: '#ff8097', 400: '#ff4d70',
+                500: '#ff2d57', 600: '#e01445', 700: '#b80f37', 800: '#900a2b', 900: '#6a071f'
+              }
+            },
+            boxShadow: {
+              glow: '0 10px 40px rgba(77, 135, 255, 0.3)',
+              soft: '0 6px 24px rgba(0,0,0,0.08)',
+              pulse: '0 0 0 20px rgba(77, 135, 255, 0.1)'
+            },
+            animation: {
+              float: 'float 6s ease-in-out infinite',
+              fadeUp: 'fadeUp 0.8s ease-out both',
+              slideIn: 'slideIn 0.6s ease-out both',
+              pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              bounce: 'bounce 2s infinite',
+              spin: 'spin 3s linear infinite',
+              heartbeat: 'heartbeat 1.5s ease-in-out infinite',
+              wave: 'wave 2s ease-in-out infinite',
+              glow: 'glow 2s ease-in-out infinite alternate',
+              shimmer: 'shimmer 3s ease-in-out infinite',
+              floatUp: 'floatUp 3s ease-in-out infinite',
+              rotate: 'rotate 8s linear infinite',
+              scale: 'scale 2s ease-in-out infinite'
+            },
+            keyframes: {
+              float: {
+                '0%,100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-20px)' }
+              },
+              fadeUp: {
+                '0%': { opacity: '0', transform: 'translateY(30px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' }
+              },
+              slideIn: {
+                '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' }
+              },
+              heartbeat: {
+                '0%,100%': { transform: 'scale(1)' },
+                '25%': { transform: 'scale(1.1)' },
+                '50%': { transform: 'scale(1.05)' },
+                '75%': { transform: 'scale(1.08)' }
+              },
+              wave: {
+                '0%,100%': { transform: 'rotate(0deg)' },
+                '25%': { transform: 'rotate(5deg)' },
+                '75%': { transform: 'rotate(-5deg)' }
+              },
+              glow: {
+                '0%': { boxShadow: '0 0 20px rgba(77, 135, 255, 0.3)' },
+                '100%': { boxShadow: '0 0 40px rgba(77, 135, 255, 0.6)' }
+              },
+              shimmer: {
+                '0%': { backgroundPosition: '-200% 0' },
+                '100%': { backgroundPosition: '200% 0' }
+              },
+              floatUp: {
+                '0%,100%': { transform: 'translateY(0px) rotate(0deg)' },
+                '50%': { transform: 'translateY(-15px) rotate(5deg)' }
+              },
+              rotate: {
+                '0%': { transform: 'rotate(0deg)' },
+                '100%': { transform: 'rotate(360deg)' }
+              },
+              scale: {
+                '0%,100%': { transform: 'scale(1)' },
+                '50%': { transform: 'scale(1.05)' }
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Pure CSS Animations and Effects */
+      .hero-bg {
+        background: linear-gradient(135deg, #f5f8ff 0%, #ffffff 50%, #fff5f6 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .hero-bg::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 80%;
+        height: 200%;
+        background: linear-gradient(45deg, rgba(77, 135, 255, 0.1), rgba(255, 45, 87, 0.1));
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite;
+        z-index: 0;
+      }
+      
+      .hero-bg::after {
+        content: '';
+        position: absolute;
+        bottom: -30%;
+        left: -15%;
+        width: 60%;
+        height: 150%;
+        background: linear-gradient(135deg, rgba(255, 45, 87, 0.08), rgba(77, 135, 255, 0.08));
+        border-radius: 50%;
+        animation: float 10s ease-in-out infinite reverse;
+        z-index: 0;
+      }
+      
+      .card-hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(0);
+      }
+      
+      .card-hover:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+      
+      .nav-link {
+        position: relative;
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+      
+      .nav-link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #4d87ff, #ff2d57);
+        transition: width 0.3s ease;
+      }
+      
+      .nav-link:hover::before {
+        width: 100%;
+      }
+      
+      .nav-link:hover {
+        color: #1e52cc;
+        transform: translateY(-2px);
+      }
+      
+      .btn-primary {
+        background: linear-gradient(135deg, #ff2d57, #4d87ff);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s ease;
+      }
+      
+      .btn-primary:hover::before {
+        left: 100%;
+      }
+      
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 30px rgba(77, 135, 255, 0.4);
+      }
+      
+      .btn-secondary {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .btn-secondary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: linear-gradient(90deg, #4d87ff, #ff2d57);
+        transition: width 0.3s ease;
+        z-index: -1;
+      }
+      
+      .btn-secondary:hover::before {
+        width: 100%;
+      }
+      
+      .btn-secondary:hover {
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      .floating-element {
+        animation: floatUp 4s ease-in-out infinite;
+      }
+      
+      .floating-element:nth-child(2) {
+        animation-delay: 1s;
+      }
+      
+      .floating-element:nth-child(3) {
+        animation-delay: 2s;
+      }
+      
+      .pulse-ring {
+        position: relative;
+      }
+      
+      .pulse-ring::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #4d87ff;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulse 2s ease-out infinite;
+      }
+      
+      .pulse-ring::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 120%;
+        height: 120%;
+        border: 1px solid rgba(77, 135, 255, 0.3);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulse 2s ease-out infinite 0.5s;
+      }
+      
+      .shimmer-text {
+        background: linear-gradient(90deg, #1e52cc, #ff2d57, #1e52cc);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s ease-in-out infinite;
+      }
+      
+      .card-reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 0.8s ease-out forwards;
+      }
+      
+      .card-reveal:nth-child(1) { animation-delay: 0.1s; }
+      .card-reveal:nth-child(2) { animation-delay: 0.2s; }
+      .card-reveal:nth-child(3) { animation-delay: 0.3s; }
+      .card-reveal:nth-child(4) { animation-delay: 0.4s; }
+      .card-reveal:nth-child(5) { animation-delay: 0.5s; }
+      .card-reveal:nth-child(6) { animation-delay: 0.6s; }
+      
+      .icon-bounce {
+        animation: bounce 2s infinite;
+      }
+      
+      .icon-bounce:nth-child(2) { animation-delay: 0.2s; }
+      .icon-bounce:nth-child(3) { animation-delay: 0.4s; }
+      .icon-bounce:nth-child(4) { animation-delay: 0.6s; }
+      
+      .gradient-text {
+        background: linear-gradient(135deg, #1e52cc, #ff2d57);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      
+      .heart-pulse {
+        animation: heartbeat 1.5s ease-in-out infinite;
+      }
+      
+      .wave-animation {
+        animation: wave 2s ease-in-out infinite;
+      }
+      
+      .glow-effect {
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+      
+      .rotate-slow {
+        animation: rotate 8s linear infinite;
+      }
+      
+      .scale-pulse {
+        animation: scale 2s ease-in-out infinite;
+      }
+      
+      /* Scroll-triggered animations using CSS only */
+      @media (prefers-reduced-motion: no-preference) {
+        .scroll-reveal {
+          opacity: 0;
+          transform: translateY(50px);
+          transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .scroll-reveal.revealed {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      /* Loading animation */
+      .loading-dots {
+        display: inline-block;
+      }
+      
+      .loading-dots::after {
+        content: '';
+        animation: loading 1.5s infinite;
+      }
+      
+      @keyframes loading {
+        0%, 20% { content: '.'; }
+        40% { content: '..'; }
+        60%, 100% { content: '...'; }
+      }
+      
+      /* Interactive elements */
+      .interactive-card {
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .interactive-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+      
+      .interactive-card:active {
+        transform: translateY(-2px) scale(0.98);
+      }
+      
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #4d87ff, #ff2d57);
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #1e52cc, #e01445);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen hero-bg text-slate-800">
+    <!-- Header -->
+    <header class="sticky top-0 z-40 glass-effect border-b border-slate-200/60">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="index-css-only.html" class="flex items-center gap-2 group">
+          <span class="inline-flex h-9 w-9 rounded-xl bg-gradient-to-br from-heart-400 to-brand-500 shadow-glow items-center justify-center text-white font-extrabold heart-pulse group-hover:scale-110 transition-transform duration-300">❤</span>
+          <span class="font-extrabold text-xl gradient-text">HeartCare</span>
+        </a>
+        <nav>
+          <ul class="flex items-center gap-4 md:gap-6 text-sm font-semibold">
+            <li><a class="nav-link text-brand-700" href="index-css-only.html">Home</a></li>
+            <li><a class="nav-link" href="about-css.html">About</a></li>
+            <li><a class="nav-link" href="tips-css.html">Tips</a></li>
+            <li><a class="nav-link" href="causes-css.html">Causes</a></li>
+            <li><a class="nav-link" href="contact-css.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="relative overflow-hidden py-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+          <div class="relative z-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
+              <span class="shimmer-text">Healthy Blood Pressure</span><br>
+              <span class="gradient-text">Stronger Heart</span>
+            </h1>
+            <p class="mt-5 text-lg text-slate-600 max-w-prose">
+              Evidence-based tips, clear explanations, and simple tools to understand your blood pressure and support lifelong heart health.
+            </p>
+            <div class="mt-8 flex gap-4">
+              <a href="tips-css.html" class="btn-primary px-6 py-3 rounded-xl text-white font-bold shadow-glow">Start with Tips</a>
+              <a href="contact-css.html" class="btn-secondary px-6 py-3 rounded-xl border border-slate-300 bg-white/70 backdrop-blur font-semibold">Contact Us</a>
+            </div>
+            <div class="mt-8 flex items-center gap-6 text-slate-500">
+              <div class="flex items-center gap-2 pulse-ring">
+                <span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+                <span>Doctor-reviewed content</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="h-2.5 w-2.5 rounded-full bg-brand-500 scale-pulse"></span>
+                <span>Free & privacy-friendly</span>
+              </div>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="aspect-[4/3] rounded-2xl glass-effect shadow-soft p-6 floating-element">
+              <svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" class="h-full w-full">
+                <defs>
+                  <linearGradient id="bgGrad" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#bfd6ff"/>
+                    <stop offset="50%" stop-color="#ffffff"/>
+                    <stop offset="100%" stop-color="#ffb3bf"/>
+                  </linearGradient>
+                  <linearGradient id="heartGrad" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#ff4d70"/>
+                    <stop offset="100%" stop-color="#4d87ff"/>
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="1200" height="900" fill="url(#bgGrad)"/>
+                <!-- Animated ECG line -->
+                <path d="M0 600 L150 600 L220 600 L260 520 L300 680 L340 600 L430 600 L470 560 L510 640 L620 600 L680 600 L720 520 L760 700 L800 600 L900 600 L950 560 L1000 640 L1100 600 L1200 600" fill="none" stroke="rgba(17,43,102,0.45)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1400" stroke-dashoffset="1400">
+                  <animate attributeName="stroke-dashoffset" from="1400" to="0" dur="3.5s" repeatCount="indefinite"/>
+                </path>
+                <!-- Pulsing heart -->
+                <g transform="translate(840,340)">
+                  <path d="M150 90 C150 40 110 10 75 10 C40 10 10 40 10 80 C10 145 90 190 110 215 C130 190 210 145 210 80 C210 40 180 10 145 10 C120 10 90 30 75 55 C60 30 30 10 5 10" fill="url(#heartGrad)" opacity="0.95">
+                    <animateTransform attributeName="transform" attributeType="XML" type="scale" values="1;1.06;1" dur="1.6s" repeatCount="indefinite" additive="sum"/>
+                  </path>
+                </g>
+              </svg>
+            </div>
+            <div class="absolute -bottom-6 -left-6 px-4 py-2 rounded-full bg-white shadow-soft border border-slate-200 text-sm font-semibold wave-animation">Live heart animation</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="card-reveal card-hover rounded-2xl border border-slate-200 p-6 shadow-soft bg-gradient-to-br from-white to-brand-50">
+              <div class="h-12 w-12 rounded-xl bg-brand-100 text-brand-700 grid place-items-center text-2xl icon-bounce">📈</div>
+              <h3 class="mt-4 font-extrabold text-xl">Understand Your Numbers</h3>
+              <p class="mt-2 text-slate-600">Learn what systolic/diastolic mean, targets, and how to measure right.</p>
+              <a class="mt-4 inline-block text-brand-700 font-bold hover:text-brand-800 transition-colors" href="about-css.html">Learn basics →</a>
+            </div>
+            <div class="card-reveal card-hover rounded-2xl border border-slate-200 p-6 shadow-soft bg-gradient-to-br from-white to-heart-50">
+              <div class="h-12 w-12 rounded-xl bg-heart-100 text-heart-700 grid place-items-center text-2xl icon-bounce">💡</div>
+              <h3 class="mt-4 font-extrabold text-xl">Daily Tips that Work</h3>
+              <p class="mt-2 text-slate-600">Small, science-backed habits that steadily move your BP in the right direction.</p>
+              <a class="mt-4 inline-block text-heart-700 font-bold hover:text-heart-800 transition-colors" href="tips-css.html">See tips →</a>
+            </div>
+            <div class="card-reveal card-hover rounded-2xl border border-slate-200 p-6 shadow-soft bg-gradient-to-br from-white to-brand-50">
+              <div class="h-12 w-12 rounded-xl bg-emerald-100 text-emerald-700 grid place-items-center text-2xl icon-bounce">📝</div>
+              <h3 class="mt-4 font-extrabold text-xl">Track & Improve</h3>
+              <p class="mt-2 text-slate-600">Use our lightweight tracker to visualize trends and stay consistent.</p>
+              <a class="mt-4 inline-block text-emerald-700 font-bold hover:text-emerald-800 transition-colors" href="causes-css.html">See causes →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Info Section -->
+      <section class="py-16">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+          <div class="order-2 md:order-1">
+            <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">What is Healthy BP?</h2>
+            <p class="mt-3 text-slate-600">For most adults, normal blood pressure is below 120/80 mmHg. Prehypertension starts above this, and hypertension is typically ≥130/80. Lifestyle changes can meaningfully lower blood pressure over weeks to months.</p>
+            <a href="about-css.html" class="mt-5 inline-block px-4 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 font-semibold transition-all duration-300 hover:border-brand-300 hover:text-brand-700">Read more</a>
+          </div>
+          <div class="order-1 md:order-2 relative">
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft interactive-card">
+              <div class="aspect-[16/9] rounded-xl overflow-hidden">
+                <svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" class="h-full w-full">
+                  <defs>
+                    <radialGradient id="bgPulse" cx="50%" cy="50%" r="60%">
+                      <stop offset="0%" stop-color="#ffffff"/>
+                      <stop offset="60%" stop-color="#eaf1ff"/>
+                      <stop offset="100%" stop-color="#ffe4ea"/>
+                    </radialGradient>
+                    <linearGradient id="ringGrad" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#4d87ff"/>
+                      <stop offset="100%" stop-color="#ff2d57"/>
+                    </linearGradient>
+                    <linearGradient id="heartGrad2" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#ff6b8a"/>
+                      <stop offset="100%" stop-color="#6b8bff"/>
+                    </linearGradient>
+                    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="8" result="b"/>
+                      <feMerge>
+                        <feMergeNode in="b"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <rect width="1200" height="675" rx="28" fill="url(#bgPulse)"/>
+
+                  <!-- Rotating gradient blobs -->
+                  <g opacity="0.35">
+                    <circle cx="1050" cy="-30" r="170" fill="#4d87ff">
+                      <animateTransform attributeName="transform" type="rotate" from="0 1050 -30" to="360 1050 -30" dur="18s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="-30" cy="620" r="160" fill="#ff2d57">
+                      <animateTransform attributeName="transform" type="rotate" from="360 -30 620" to="0 -30 620" dur="22s" repeatCount="indefinite"/>
+                    </circle>
+                  </g>
+
+                  <!-- Concentric pulse rings -->
+                  <g transform="translate(600,337)">
+                    <circle r="40" fill="none" stroke="url(#ringGrad)" stroke-width="6" filter="url(#softGlow)">
+                      <animate attributeName="r" values="40;140" dur="2.2s" repeatCount="indefinite"/>
+                      <animate attributeName="opacity" values="1;0" dur="2.2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle r="40" fill="none" stroke="url(#ringGrad)" stroke-width="6" opacity="0.8">
+                      <animate attributeName="r" values="40;220" dur="3.2s" repeatCount="indefinite"/>
+                      <animate attributeName="opacity" values="0.8;0" dur="3.2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle r="40" fill="none" stroke="url(#ringGrad)" stroke-width="6" opacity="0.6">
+                      <animate attributeName="r" values="40;300" dur="4.2s" repeatCount="indefinite"/>
+                      <animate attributeName="opacity" values="0.6;0" dur="4.2s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Central heart icon with gentle scale -->
+                    <g>
+                      <path d="M0 -15 C-10 -40 -50 -45 -70 -25 C-90 -5 -85 25 -60 50 C-30 80 0 95 0 95 C0 95 30 80 60 50 C85 25 90 -5 70 -25 C50 -45 10 -40 0 -15 Z" fill="url(#heartGrad2)">
+                        <animateTransform attributeName="transform" type="scale" values="1;1.06;1" dur="1.8s" repeatCount="indefinite"/>
+                      </path>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="absolute -top-5 -right-5 h-16 w-16 rounded-2xl bg-gradient-to-br from-heart-400 to-brand-500 shadow-glow animate-float glow-effect"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 glass-effect">
+      <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-slate-600">© 2024 HeartCare - Pure CSS Version</p>
+        <div class="flex gap-4 text-sm">
+          <a class="hover:underline hover:text-brand-700 transition-colors" href="contact-css.html">Contact</a>
+          <a class="hover:underline hover:text-brand-700 transition-colors" href="#">Privacy</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Pure CSS Scroll Reveal Script -->
+    <script>
+      // Minimal script only for scroll reveal - everything else is pure CSS
+      document.addEventListener('DOMContentLoaded', function() {
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+            }
+          });
+        }, observerOptions);
+
+        // Observe all scroll-reveal elements
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+          observer.observe(el);
+        });
+      });
+    </script>
+  </body>
+</html>

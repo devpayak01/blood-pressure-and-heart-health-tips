@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tips | HeartCare - Pure CSS</title>
+    <meta name="description" content="Actionable, evidence-backed tips for healthier blood pressure with pure CSS animations." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+            colors: {
+              brand: {
+                50: '#f5f8ff', 100: '#e6f0ff', 200: '#bfd6ff', 300: '#99bcff', 400: '#73a1ff',
+                500: '#4d87ff', 600: '#2a69f7', 700: '#1e52cc', 800: '#173e99', 900: '#112b66'
+              },
+              heart: {
+                50: '#fff5f6', 100: '#ffe1e5', 200: '#ffb3bf', 300: '#ff8097', 400: '#ff4d70',
+                500: '#ff2d57', 600: '#e01445', 700: '#b80f37', 800: '#900a2b', 900: '#6a071f'
+              }
+            },
+            boxShadow: {
+              glow: '0 10px 40px rgba(77, 135, 255, 0.3)',
+              soft: '0 6px 24px rgba(0,0,0,0.08)',
+              pulse: '0 0 0 20px rgba(77, 135, 255, 0.1)'
+            },
+            animation: {
+              float: 'float 6s ease-in-out infinite',
+              fadeUp: 'fadeUp 0.8s ease-out both',
+              slideIn: 'slideIn 0.6s ease-out both',
+              pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              bounce: 'bounce 2s infinite',
+              spin: 'spin 3s linear infinite',
+              heartbeat: 'heartbeat 1.5s ease-in-out infinite',
+              wave: 'wave 2s ease-in-out infinite',
+              glow: 'glow 2s ease-in-out infinite alternate',
+              shimmer: 'shimmer 3s ease-in-out infinite',
+              floatUp: 'floatUp 3s ease-in-out infinite',
+              rotate: 'rotate 8s linear infinite',
+              scale: 'scale 2s ease-in-out infinite',
+              wiggle: 'wiggle 1s ease-in-out infinite',
+              flip: 'flip 0.6s ease-in-out',
+              zoom: 'zoom 0.3s ease-in-out'
+            },
+            keyframes: {
+              float: {
+                '0%,100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-20px)' }
+              },
+              fadeUp: {
+                '0%': { opacity: '0', transform: 'translateY(30px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' }
+              },
+              slideIn: {
+                '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' }
+              },
+              heartbeat: {
+                '0%,100%': { transform: 'scale(1)' },
+                '25%': { transform: 'scale(1.1)' },
+                '50%': { transform: 'scale(1.05)' },
+                '75%': { transform: 'scale(1.08)' }
+              },
+              wave: {
+                '0%,100%': { transform: 'rotate(0deg)' },
+                '25%': { transform: 'rotate(5deg)' },
+                '75%': { transform: 'rotate(-5deg)' }
+              },
+              glow: {
+                '0%': { boxShadow: '0 0 20px rgba(77, 135, 255, 0.3)' },
+                '100%': { boxShadow: '0 0 40px rgba(77, 135, 255, 0.6)' }
+              },
+              shimmer: {
+                '0%': { backgroundPosition: '-200% 0' },
+                '100%': { backgroundPosition: '200% 0' }
+              },
+              floatUp: {
+                '0%,100%': { transform: 'translateY(0px) rotate(0deg)' },
+                '50%': { transform: 'translateY(-15px) rotate(5deg)' }
+              },
+              rotate: {
+                '0%': { transform: 'rotate(0deg)' },
+                '100%': { transform: 'rotate(360deg)' }
+              },
+              scale: {
+                '0%,100%': { transform: 'scale(1)' },
+                '50%': { transform: 'scale(1.05)' }
+              },
+              wiggle: {
+                '0%,100%': { transform: 'rotate(-3deg)' },
+                '50%': { transform: 'rotate(3deg)' }
+              },
+              flip: {
+                '0%': { transform: 'rotateY(0)' },
+                '50%': { transform: 'rotateY(90deg)' },
+                '100%': { transform: 'rotateY(0)' }
+              },
+              zoom: {
+                '0%': { transform: 'scale(1)' },
+                '50%': { transform: 'scale(1.1)' },
+                '100%': { transform: 'scale(1)' }
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Pure CSS Animations and Effects */
+      .hero-bg {
+        background: linear-gradient(135deg, #f5f8ff 0%, #ffffff 50%, #fff5f6 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .card-hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(0);
+        cursor: pointer;
+      }
+      
+      .card-hover:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+      
+      .card-hover:active {
+        transform: translateY(-4px) scale(0.98);
+      }
+      
+      .nav-link {
+        position: relative;
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+      
+      .nav-link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #4d87ff, #ff2d57);
+        transition: width 0.3s ease;
+      }
+      
+      .nav-link:hover::before {
+        width: 100%;
+      }
+      
+      .nav-link:hover {
+        color: #1e52cc;
+        transform: translateY(-2px);
+      }
+      
+      .tip-card {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .tip-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: left 0.6s ease;
+      }
+      
+      .tip-card:hover::before {
+        left: 100%;
+      }
+      
+      .tip-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+      
+      .icon-float {
+        animation: floatUp 4s ease-in-out infinite;
+      }
+      
+      .icon-float:nth-child(1) { animation-delay: 0s; }
+      .icon-float:nth-child(2) { animation-delay: 0.5s; }
+      .icon-float:nth-child(3) { animation-delay: 1s; }
+      .icon-float:nth-child(4) { animation-delay: 1.5s; }
+      .icon-float:nth-child(5) { animation-delay: 2s; }
+      .icon-float:nth-child(6) { animation-delay: 2.5s; }
+      
+      .gradient-text {
+        background: linear-gradient(135deg, #1e52cc, #ff2d57);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .shimmer-text {
+        background: linear-gradient(90deg, #1e52cc, #ff2d57, #1e52cc);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s ease-in-out infinite;
+      }
+      
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      
+      .pulse-ring {
+        position: relative;
+      }
+      
+      .pulse-ring::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #4d87ff;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulse 2s ease-out infinite;
+      }
+      
+      .pulse-ring::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 120%;
+        height: 120%;
+        border: 1px solid rgba(77, 135, 255, 0.3);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulse 2s ease-out infinite 0.5s;
+      }
+      
+      .card-reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 0.8s ease-out forwards;
+      }
+      
+      .card-reveal:nth-child(1) { animation-delay: 0.1s; }
+      .card-reveal:nth-child(2) { animation-delay: 0.2s; }
+      .card-reveal:nth-child(3) { animation-delay: 0.3s; }
+      .card-reveal:nth-child(4) { animation-delay: 0.4s; }
+      .card-reveal:nth-child(5) { animation-delay: 0.5s; }
+      .card-reveal:nth-child(6) { animation-delay: 0.6s; }
+      
+      .icon-bounce {
+        animation: bounce 2s infinite;
+      }
+      
+      .icon-bounce:nth-child(1) { animation-delay: 0s; }
+      .icon-bounce:nth-child(2) { animation-delay: 0.2s; }
+      .icon-bounce:nth-child(3) { animation-delay: 0.4s; }
+      .icon-bounce:nth-child(4) { animation-delay: 0.6s; }
+      .icon-bounce:nth-child(5) { animation-delay: 0.8s; }
+      .icon-bounce:nth-child(6) { animation-delay: 1s; }
+      
+      .wiggle {
+        animation: wiggle 1s ease-in-out infinite;
+      }
+      
+      .flip {
+        animation: flip 0.6s ease-in-out;
+      }
+      
+      .zoom {
+        animation: zoom 0.3s ease-in-out;
+      }
+      
+      .heart-pulse {
+        animation: heartbeat 1.5s ease-in-out infinite;
+      }
+      
+      .wave-animation {
+        animation: wave 2s ease-in-out infinite;
+      }
+      
+      .glow-effect {
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+      
+      .rotate-slow {
+        animation: rotate 8s linear infinite;
+      }
+      
+      .scale-pulse {
+        animation: scale 2s ease-in-out infinite;
+      }
+      
+      /* Interactive elements */
+      .interactive-card {
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .interactive-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+      
+      .interactive-card:active {
+        transform: translateY(-2px) scale(0.98);
+      }
+      
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #4d87ff, #ff2d57);
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #1e52cc, #e01445);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen hero-bg text-slate-800">
+    <!-- Header -->
+    <header class="sticky top-0 z-40 glass-effect border-b border-slate-200/60">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="index-css-only.html" class="flex items-center gap-2 group">
+          <span class="inline-flex h-9 w-9 rounded-xl bg-gradient-to-br from-heart-400 to-brand-500 shadow-glow items-center justify-center text-white font-extrabold heart-pulse group-hover:scale-110 transition-transform duration-300">❤</span>
+          <span class="font-extrabold text-xl gradient-text">HeartCare</span>
+        </a>
+        <nav>
+          <ul class="flex items-center gap-4 md:gap-6 text-sm font-semibold">
+            <li><a class="nav-link" href="index-css-only.html">Home</a></li>
+            <li><a class="nav-link" href="about-css.html">About</a></li>
+            <li><a class="nav-link text-brand-700" href="tips-css.html">Tips</a></li>
+            <li><a class="nav-link" href="causes-css.html">Causes</a></li>
+            <li><a class="nav-link" href="contact-css.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pb-16">
+      <!-- Hero Section -->
+      <section class="max-w-7xl mx-auto px-6 pt-14 pb-6">
+        <h1 class="text-4xl md:text-5xl font-extrabold shimmer-text">Daily Tips</h1>
+        <p class="mt-3 text-slate-600 max-w-prose">Small, consistent actions add up. Try these evidence-based habits to steadily lower your blood pressure.</p>
+      </section>
+
+      <!-- Tips Grid -->
+      <section class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="tip-card card-reveal rounded-2xl border border-slate-200 p-6 bg-white shadow-soft">
+          <div class="text-3xl icon-float">🥛</div>
+          <h3 class="mt-3 font-extrabold text-xl">Limit Sodium</h3>
+          <p class="text-slate-600">Aim for less than 1,500–2,300 mg/day. Check labels and choose fresh foods.</p>
+        </div>
+        <div class="tip-card card-reveal rounded-2xl border border-slate-200 p-6 bg-white shadow-soft">
+          <div class="text-3xl icon-float">🚶</div>
+          <h3 class="mt-3 font-extrabold text-xl">Move Daily</h3>
+          <p class="text-slate-600">150 minutes/week of moderate activity lowers BP and boosts heart health.</p>
+        </div>
+        <div class="tip-card card-reveal rounded-2xl border border-slate-200 p-6 bg-white shadow-soft">
+          <div class="text-3xl icon-float">🥗</div>
+          <h3 class="mt-3 font-extrabold text-xl">Eat DASH Style</h3>
+          <p class="text-slate-600">Focus on fruits, vegetables, whole grains, legumes, low-fat dairy.</p>
+        </div>
+        <div class="tip-card card-reveal rounded-2xl border border-slate-200 p-6 bg-white shadow-soft">
+          <div class="text-3xl icon-float">🧘</div>
+          <h3 class="mt-3 font-extrabold text-xl">Manage Stress</h3>
+          <p class="text-slate-600">Try breathing exercises, mindfulness, or light yoga 10 minutes daily.</p>
+        </div>
+        <div class="tip-card card-reveal rounded-2xl border border-slate-200 p-6 bg-white shadow-soft">
+          <div class="text-3xl icon-float">🛌</div>
+          <h3 class="mt-3 font-extrabold text-xl">Prioritize Sleep</h3>
+          <p class="text-slate-600">7–9 hours nightly helps regulate hormones and supports heart health.</p>
+        </div>
+        <div class="tip-card card-reveal rounded-2xl border border-slate-200 p-6 bg-white shadow-soft">
+          <div class="text-3xl icon-float">💧</div>
+          <h3 class="mt-3 font-extrabold text-xl">Hydrate</h3>
+          <p class="text-slate-600">Water supports circulation and may help maintain healthy BP.</p>
+        </div>
+      </section>
+
+      <!-- Additional Tips Section -->
+      <section class="max-w-7xl mx-auto px-6 mt-16">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Pro Tips</h2>
+          <p class="mt-3 text-slate-600">Advanced strategies for better blood pressure management</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="interactive-card rounded-2xl border border-slate-200 p-8 bg-gradient-to-br from-brand-50 to-white shadow-soft">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="h-12 w-12 rounded-xl bg-brand-100 text-brand-700 grid place-items-center text-2xl wiggle">📊</div>
+              <h3 class="font-extrabold text-xl">Track Your Progress</h3>
+            </div>
+            <p class="text-slate-600">Monitor your blood pressure regularly and keep a log. Small improvements over time add up to significant health benefits.</p>
+          </div>
+          
+          <div class="interactive-card rounded-2xl border border-slate-200 p-8 bg-gradient-to-br from-heart-50 to-white shadow-soft">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="h-12 w-12 rounded-xl bg-heart-100 text-heart-700 grid place-items-center text-2xl wiggle">🤝</div>
+              <h3 class="font-extrabold text-xl">Get Support</h3>
+            </div>
+            <p class="text-slate-600">Share your goals with family and friends. Having a support system makes it easier to stick to healthy habits.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 glass-effect">
+      <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-slate-600">© 2024 HeartCare - Pure CSS Version</p>
+        <div class="flex gap-4 text-sm">
+          <a class="hover:underline hover:text-brand-700 transition-colors" href="contact-css.html">Contact</a>
+          <a class="hover:underline hover:text-brand-700 transition-colors" href="#">Privacy</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
